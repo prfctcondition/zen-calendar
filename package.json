@@ -1,0 +1,68 @@
+{
+  "name": "zen-calendar",
+  "version": "1.0.0",
+  "description": "Calendar widget with Google Calendar integration",
+  "main": "electron/main.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "electron:dev": "concurrently \"vite\" \"wait-on http://localhost:5173 && electron .\"",
+    "pack": "vite build && electron-builder --dir",
+    "dist": "vite build && electron-builder"
+  },
+  "build": {
+    "appId": "com.glasscalendar.widget",
+    "productName": "Zen Calendar",
+    "icon": "icon256.ico",
+    "files": [
+      "dist/**/*",
+      "electron/main.js",
+      "electron/preload.js",
+      "electron/icon256.ico",
+      "electron/*.ps1"
+    ],
+    "directories": {
+      "output": "release"
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "icon256.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "installerIcon": "icon256.ico",
+      "uninstallerIcon": "icon256.ico",
+      "installerHeaderIcon": "icon256.ico",
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Zen Calendar"
+    }
+  },
+  "dependencies": {
+    "date-fns": "^3.3.1",
+    "electron-store": "^8.1.0",
+    "lucide-react": "^0.344.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.55",
+    "@types/react-dom": "^18.2.19",
+    "@vitejs/plugin-react": "^4.2.1",
+    "concurrently": "^8.2.2",
+    "electron": "^42.5.0",
+    "electron-builder": "^26.15.3",
+    "typescript": "^5.3.3",
+    "vite": "^5.1.0",
+    "wait-on": "^7.2.0"
+  }
+}

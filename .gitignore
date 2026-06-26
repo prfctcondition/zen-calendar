@@ -1,0 +1,15 @@
+node_modules/
+dist/
+release/
+*.log
+.DS_Store
+Thumbs.db
+src/config.ts
+src/config.js
+electron/app.ico
+electron/icon.png
+electron/icon_sm.png
+electron/icon256.ico
+electron/ico64.png
+icon256.ico
+make_icon.py
