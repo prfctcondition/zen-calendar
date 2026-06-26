@@ -4,11 +4,8 @@ release/
 *.log
 .DS_Store
 Thumbs.db
-src/config.ts
-src/config.js
-electron/app.ico
+*.ps1
 electron/icon.png
 electron/icon_sm.png
-electron/icon256.ico
 electron/ico64.png
 make_icon.py

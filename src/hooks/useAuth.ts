@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { getAuthUrl, loadTokens, saveTokens, clearTokens, getCalendars } from '../services/googleApi';
-import { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET } from '../config';
+import { GOOGLE_CLIENT_ID } from '../config';
 import { GoogleCalendar } from '../types';
 
 export function useAuth() {
@@ -29,7 +29,7 @@ export function useAuth() {
       const verifier = localStorage.getItem('oauth_verifier');
       if (!verifier) { console.warn('[auth] no verifier'); setIsLoading(false); return; }
 
-      const result = await window.electronAPI.exchangeCode({ code, codeVerifier: verifier, clientId: GOOGLE_CLIENT_ID, clientSecret: GOOGLE_CLIENT_SECRET || undefined });
+      const result = await window.electronAPI.exchangeCode({ code, codeVerifier: verifier, clientId: GOOGLE_CLIENT_ID });
 
       if (result.access_token) {
         await saveTokens(result);

@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import { useAuth } from '../hooks/useAuth';
 import { useEvents } from '../hooks/useEvents';
 import { useWidgetSize } from '../hooks/useWidgetSize';
@@ -17,7 +17,6 @@ export function Widget() {
   const size = useWidgetSize();
   const colors = useWallpaperColors();
   const [viewMode, setViewMode] = useState<ViewMode>('calendar');
-  const [settingsOpen, setSettingsOpen] = useState(false);
 
   const todayEvents = useMemo(() => getEventsForDate(new Date()), [getEventsForDate]);
   useNotifications(todayEvents);
@@ -48,6 +47,7 @@ export function Widget() {
             viewMode={viewMode}
             onToggleView={() => setViewMode(m => m === 'calendar' ? 'events' : 'calendar')}
             onRefresh={refresh}
+            onLogout={logout}
             isAuthenticated={isAuthenticated}
             eventsLoading={eventsLoading}
           />

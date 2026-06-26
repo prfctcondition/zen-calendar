@@ -1,18 +1,19 @@
 import { useState, useEffect } from 'react';
 import { format } from 'date-fns';
 import { ru } from 'date-fns/locale';
-import { X, Minus, RefreshCw, Pin } from 'lucide-react';
+import { X, Minus, RefreshCw, Pin, LogOut } from 'lucide-react';
 import { ViewMode } from '../types';
 
 interface Props {
   viewMode: ViewMode;
   onToggleView: () => void;
   onRefresh: () => void;
+  onLogout: () => void;
   isAuthenticated: boolean;
   eventsLoading: boolean;
 }
 
-export function WidgetHeader({ viewMode, onToggleView, onRefresh, isAuthenticated, eventsLoading }: Props) {
+export function WidgetHeader({ viewMode, onToggleView, onRefresh, onLogout, isAuthenticated, eventsLoading }: Props) {
   const [time, setTime] = useState(new Date());
   const [isOnTop, setIsOnTop] = useState(false);
 
@@ -34,6 +35,7 @@ export function WidgetHeader({ viewMode, onToggleView, onRefresh, isAuthenticate
         </div>
         <div className="header-controls no-drag">
           <button className={`header-btn ${eventsLoading ? 'spinning' : ''}`} onClick={onRefresh} title="Обновить"><RefreshCw size={14} /></button>
+          {isAuthenticated && <button className="header-btn" onClick={onLogout} title="Выйти"><LogOut size={14} /></button>}
           <button className={`header-btn ${isOnTop ? 'active' : ''}`} onClick={() => window.electronAPI?.toggleOnTop()} title={isOnTop ? 'Открепить' : 'Поверх всех'}><Pin size={14} /></button>
           <button className="header-btn" onClick={() => window.electronAPI?.minimize()} title="Свернуть"><Minus size={14} /></button>
           <button className="header-btn close-btn" onClick={() => window.electronAPI?.close()} title="Закрыть"><X size={14} /></button>

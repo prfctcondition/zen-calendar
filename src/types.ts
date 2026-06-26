@@ -30,7 +30,6 @@ interface ExchangeParams {
   code: string;
   codeVerifier: string;
   clientId: string;
-  clientSecret: string;
 }
 
 interface RefreshParams {
